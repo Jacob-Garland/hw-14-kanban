@@ -11,7 +11,7 @@ export const login = async (req: Request, res: Response) => {
     return res.status(404).send('User not found');
   } else {
     if (await bcrypt.compare(password, user.password)) {
-      const accessToken = jwt.sign({ username }, process.env.ACCESS_TOKEN_SECRET as string);
+      const accessToken = jwt.sign({ username }, process.env.JWT_SECRET_KEY as string);
       return res.json({ accessToken });
     } else {
       return res.status(403).send('Invalid password');
